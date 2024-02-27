@@ -2,6 +2,10 @@
   "extends": ["next", "prettier", "next/core-web-vitals"],
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
+    "no-console": "warn",
+    "no-duplicate-imports": "error",
+    "prefer-const": "error",
+    "react-hooks/exhaustive-deps": "error",
     "no-unused-vars": [
       "error",
       {
@@ -11,7 +15,25 @@
         "vars": "all"
       }
     ],
-    "prefer-const": "error",
-    "react-hooks/exhaustive-deps": "error"
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "external",
+          "builtin",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ]
   }
 }
