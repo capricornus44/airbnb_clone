@@ -6,12 +6,14 @@ import {
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import defaultUser from '../../public/default_user.png'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
 
@@ -37,6 +39,25 @@ const UserMenu = async () => {
       <DropdownMenuContent align='end' className='w-48'>
         {user ? (
           <>
+            <DropdownMenuItem>
+              <Link href='/trips' className='block w-full'>
+                Trips
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href='/wishlists' className='block w-full'>
+                Wishlists
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <form>
+                <button type='submit' className='w-full'>
+                  Airbnb your home
+                </button>
+              </form>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogoutLink className='w-full'>Log out</LogoutLink>
             </DropdownMenuItem>
