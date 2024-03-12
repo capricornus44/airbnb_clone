@@ -8,6 +8,8 @@ import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { createAirbnbHome } from '@/lib/actions'
+
 import defaultUser from '../../public/default_user.png'
 import {
   DropdownMenu,
@@ -20,6 +22,10 @@ import {
 const UserMenu = async () => {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
+
+  const createAirbnbHomeWithId = createAirbnbHome.bind(null, {
+    userId: user?.id as string
+  })
 
   return (
     <DropdownMenu>
@@ -51,7 +57,7 @@ const UserMenu = async () => {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <form>
+              <form action={createAirbnbHomeWithId}>
                 <button type='submit' className='w-full'>
                   Airbnb your home
                 </button>

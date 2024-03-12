@@ -15,7 +15,31 @@ model User {
   firstName      String     
   lastName       String     
   profileImage   String?   
+  Home           Home[]
       
   @@map(name: "users")
+}
+
+model Home {
+  id                  String      @id @default(uuid())
+  title               String?
+  description         String?
+  guests              String?
+  bedrooms            String?
+  bathrooms           String?
+  country             String?
+  photo               String?
+  price               String?
+  categoryName        String?
+  createdAt           DateTime    @default(now())
+
+  isCategoryAdded     Boolean     @default(false)
+  isDescriptionAdded  Boolean     @default(false)
+  isLocationAdded     Boolean     @default(false)
+
+  User                User?       @relation(fields: [userId], references: [id])
+  userId              String?
+
+  @@map(name: "homes")
 }
  
