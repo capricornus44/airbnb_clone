@@ -9,6 +9,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'a0.muscache.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'iqoensedfzodmsvskeud.supabase.co'
       }
     ]
   }

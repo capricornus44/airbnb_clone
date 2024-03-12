@@ -31,10 +31,10 @@ const CategoriesFilter = () => {
           key={id}
           href={`${pathname}?${createQueryString('filter', name)}`}
           className={cn(
-            'flex flex-col items-center gap-y-2',
+            'flex flex-col items-center gap-y-2 border-b-2 border-transparent pb-2',
             filter === name
-              ? 'flex-shrink-0 border-b-2 border-black pb-2'
-              : 'flex-shrink-0 opacity-60 hover:border-b-2 hover:border-gray-200 hover:pb-2 hover:opacity-100'
+              ? 'flex-shrink-0 border-black'
+              : 'flex-shrink-0 opacity-60 hover:border-gray-200 hover:opacity-100'
           )}
         >
           <div className='relative size-6'>
