@@ -11,11 +11,11 @@ const Icon = icon({
 
 const Map = ({ location }: { location: string }) => {
   const { getCountryByValue } = useCountries()
-  const latLang = getCountryByValue(location)?.latLang
+  const latLng = getCountryByValue(location)?.latLng
 
   return (
     <MapContainer
-      center={latLang ?? [51.505, -0.09]}
+      center={latLng ?? [51.505, -0.09]}
       zoom={8}
       scrollWheelZoom={false}
       className='relative z-0 h-[50vh] rounded-lg'
@@ -24,7 +24,7 @@ const Map = ({ location }: { location: string }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={latLang ?? [51.505, -0.09]} icon={Icon} />
+      <Marker position={latLng ?? [51.505, -0.09]} icon={Icon} />
     </MapContainer>
   )
 }

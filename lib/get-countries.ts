@@ -4,7 +4,7 @@ const countriesFormatted = countries.map(country => ({
   value: country.cca2,
   label: country.name.common,
   flag: country.flag,
-  latLang: country.latlng,
+  latLng: country.latlng,
   region: country.region
 }))
 
