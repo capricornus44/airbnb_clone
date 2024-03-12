@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation'
 
 import prisma from './db'
+import { supabase } from './supabase'
 
 export async function createAirbnbHome({ userId }: { userId: string }) {
   const data = await prisma.home.findFirst({
@@ -52,4 +53,41 @@ export async function addCategoryToAirbnbHome(formData: FormData) {
   })
 
   return redirect(`/become-a-host/${homeId}/description`)
+}
+
+export async function addDescriptionToAirbnbHome(formData: FormData) {
+  const title = formData.get('title') as string
+  const description = formData.get('description') as string
+  const price = formData.get('price')
+  const imageFile = formData.get('image') as File
+  const guests = formData.get('guests') as string
+  const rooms = formData.get('rooms') as string
+  const bathrooms = formData.get('bathrooms') as string
+
+  const homeId = formData.get('homeId') as string
+
+  const { data: imageData } = await supabase.storage
+    .from('images')
+    .upload(`${imageFile.name}-${new Date()}`, imageFile, {
+      cacheControl: '2592000', // whole year
+      contentType: 'image/png'
+    })
+
+  await prisma.home.update({
+    where: {
+      id: homeId
+    },
+    data: {
+      title,
+      description,
+      price: price?.toString(),
+      photo: imageData?.path,
+      guests,
+      bedrooms: rooms,
+      bathrooms,
+      isDescriptionAdded: true
+    }
+  })
+
+  return redirect(`/become-a-host/${homeId}/location`)
 }
