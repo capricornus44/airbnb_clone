@@ -91,3 +91,20 @@ export async function addDescriptionToAirbnbHome(formData: FormData) {
 
   return redirect(`/become-a-host/${homeId}/location`)
 }
+
+export async function addLocationToAirbnbHome(formData: FormData) {
+  const country = formData.get('country') as string
+  const homeId = formData.get('homeId') as string
+
+  await prisma.home.update({
+    where: {
+      id: homeId
+    },
+    data: {
+      country,
+      isLocationAdded: true
+    }
+  })
+
+  return redirect('/')
+}
