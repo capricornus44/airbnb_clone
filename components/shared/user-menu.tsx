@@ -55,6 +55,11 @@ const UserMenu = async () => {
                 Wishlists
               </Link>
             </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href='/listings' className='block w-full'>
+                Listings
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <form action={createAirbnbHomeWithId}>
