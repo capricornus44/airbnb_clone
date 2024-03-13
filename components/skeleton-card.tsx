@@ -6,11 +6,11 @@ const SkeletonCard = () => {
       <Skeleton className='h-72 w-full rounded-lg' />
 
       <div className='mb-2 space-y-1'>
-        <Skeleton className='h-4 w-1/2' />
-        <Skeleton className='h-4 w-full' />
+        <Skeleton className='h-6 w-1/2' />
+        <Skeleton className='h-10 w-full' />
       </div>
 
-      <Skeleton className='h-4 w-1/3' />
+      <Skeleton className='h-5 w-1/3' />
     </div>
   )
 }

@@ -66,7 +66,10 @@ const PlacesList = async ({
   return (
     <>
       {places.length === 0 ? (
-        <NoResult />
+        <NoResult
+          title='No result.'
+          description='Please select another category or create your own host!'
+        />
       ) : (
         <ul className='grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {places.map(place => (
