@@ -1,3 +1,4 @@
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { Suspense } from 'react'
 
 import CategoriesFilter from '@/components/categories-filter'
@@ -7,8 +8,10 @@ import SkeletonCard from '@/components/skeleton-card'
 import prisma from '@/lib/db'
 
 const getData = async ({
-  searchParams
+  searchParams,
+  userId
 }: {
+  userId: string | undefined
   searchParams?: { filter?: string }
 }) => {
   const data = await prisma.home.findMany({
@@ -23,7 +26,12 @@ const getData = async ({
       id: true,
       price: true,
       description: true,
-      country: true
+      country: true,
+      Favorite: {
+        where: {
+          userId: userId ?? undefined
+        }
+      }
     }
   })
 
@@ -51,7 +59,9 @@ const PlacesList = async ({
 }: {
   searchParams?: { filter?: string }
 }) => {
-  const places = await getData({ searchParams })
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
+  const places = await getData({ searchParams, userId: user?.id })
 
   return (
     <>
@@ -66,7 +76,11 @@ const PlacesList = async ({
               imagePath={place.photo as string}
               price={place.price as string}
               description={place.description as string}
-              id={place.id as string}
+              userId={user?.id}
+              isFavorite={place.Favorite.length > 0 ? true : false}
+              favoriteId={place.Favorite[0]?.id}
+              homeId={place.id}
+              pathname='/'
             />
           ))}
         </ul>

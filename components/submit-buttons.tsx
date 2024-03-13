@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
+import { Heart, Loader2 } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
 
 import { Button } from './ui/button'
@@ -17,6 +17,62 @@ export const StructurePageSubmit = () => {
       ) : (
         <Button type='submit' size='lg' className='text-base'>
           Next
+        </Button>
+      )}
+    </>
+  )
+}
+
+export const AddToFavoriteButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <>
+      {pending ? (
+        <Button
+          variant='outline'
+          size='icon'
+          disabled
+          className='bg-primary-foreground'
+        >
+          <Loader2 className='animate-spin text-primary' />
+        </Button>
+      ) : (
+        <Button
+          variant='outline'
+          size='icon'
+          type='submit'
+          className='bg-primary-foreground'
+        >
+          <Heart />
+        </Button>
+      )}
+    </>
+  )
+}
+
+export const DeleteFromFavoriteButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <>
+      {pending ? (
+        <Button
+          variant='outline'
+          size='icon'
+          disabled
+          className='bg-primary-foreground'
+        >
+          <Loader2 className='animate-spin text-primary' />
+        </Button>
+      ) : (
+        <Button
+          variant='outline'
+          size='icon'
+          type='submit'
+          className='bg-primary-foreground'
+        >
+          <Heart fill='#e21c49' className='text-primary' />
         </Button>
       )}
     </>

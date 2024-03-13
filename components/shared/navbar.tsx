@@ -14,11 +14,13 @@ const Navbar = () => {
           <Image
             src={desktopLogo}
             alt='airbnb logo'
+            priority
             className='hidden w-28 lg:block'
           />
           <Image
             src={mobileLogo}
             alt='airbnb logo'
+            priority
             className='block w-8 lg:hidden'
           />
         </Link>

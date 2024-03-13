@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import prisma from './db'
@@ -125,4 +126,34 @@ export async function addLocationToAirbnbHome(formData: FormData) {
   })
 
   return redirect('/')
+}
+
+export async function addToFavorite(formData: FormData) {
+  const homeId = formData.get('homeId') as string
+  const userId = formData.get('userId') as string
+  const pathname = formData.get('pathname') as string
+
+  await prisma.favorite.create({
+    data: {
+      homeId,
+      userId
+    }
+  })
+
+  revalidatePath(pathname)
+}
+
+export async function deleteFromFavorite(formData: FormData) {
+  const favoriteId = formData.get('favoriteId') as string
+  const userId = formData.get('userId') as string
+  const pathname = formData.get('pathname') as string
+
+  await prisma.favorite.delete({
+    where: {
+      id: favoriteId,
+      userId
+    }
+  })
+
+  revalidatePath(pathname)
 }
