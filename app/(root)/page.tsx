@@ -2,12 +2,17 @@ import CategoriesFilter from '@/components/categories-filter'
 import PlaceCard from '@/components/place-card'
 import prisma from '@/lib/db'
 
-const getData = async () => {
+const getData = async ({
+  searchParams
+}: {
+  searchParams?: { filter?: string }
+}) => {
   const data = await prisma.home.findMany({
     where: {
       isCategoryAdded: true,
       isDescriptionAdded: true,
-      isLocationAdded: true
+      isLocationAdded: true,
+      categoryName: searchParams?.filter ?? undefined
     },
     select: {
       photo: true,
@@ -21,8 +26,12 @@ const getData = async () => {
   return data
 }
 
-export default async function Home() {
-  const places = await getData()
+export default async function Home({
+  searchParams
+}: {
+  searchParams?: { filter?: string }
+}) {
+  const places = await getData({ searchParams })
 
   return (
     <main className='container mx-auto px-5 lg:px-10'>
