@@ -26,7 +26,7 @@ const PlaceCard = ({
   console.log(id)
 
   return (
-    <Link href=''>
+    <Link href='' role='li'>
       <Card className='border-0 shadow-none'>
         <CardHeader className='relative mb-3 h-72'>
           <Image
