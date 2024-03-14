@@ -35,6 +35,9 @@ dependencies:
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
+  date-fns:
+    specifier: ^3.4.0
+    version: 3.4.0
   leaflet:
     specifier: ^1.9.4
     version: 1.9.4

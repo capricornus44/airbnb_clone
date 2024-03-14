@@ -157,3 +157,21 @@ export async function deleteFromFavorite(formData: FormData) {
 
   revalidatePath(pathname)
 }
+
+export async function createReservation(formData: FormData) {
+  const homeId = formData.get('homeId') as string
+  const userId = formData.get('userId') as string
+  const startDate = formData.get('startDate') as string
+  const endDate = formData.get('endDate') as string
+
+  await prisma.reservation.create({
+    data: {
+      startDate,
+      endDate,
+      homeId,
+      userId
+    }
+  })
+
+  return redirect('/')
+}

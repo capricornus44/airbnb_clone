@@ -17,6 +17,7 @@ model User {
   profileImage   String?   
   Home           Home[]
   Favorite       Favorite[]
+  Reservation    Reservation[]
 }
 
 model Home {
@@ -31,6 +32,7 @@ model Home {
   price               String?
   categoryName        String?
   Favorite            Favorite[]
+  Reservation         Reservation[]
 
   isCategoryAdded     Boolean     @default(false)
   isDescriptionAdded  Boolean     @default(false)
@@ -50,5 +52,17 @@ model Favorite {
   Home                Home?       @relation(fields: [homeId], references: [id])
 
   createdAt           DateTime    @default(now())
+}
+
+model Reservation {
+  id                  String      @id @default(uuid())
+  startDate           DateTime    
+  endDate             DateTime   
+  createdAt           DateTime    @default(now()) 
+
+  Home                Home?       @relation(fields: [homeId], references: [id])
+  homeId              String?
+  User                User?       @relation(fields: [userId], references: [id])
+  userId              String?
 }
  

@@ -12,7 +12,7 @@ export const StructurePageSubmit = () => {
     <>
       {pending ? (
         <Button disabled size='lg' className='text-base'>
-          <Loader2 className='mr-2 size-4 animate-spin' /> Please wait
+          <Loader2 className='mr-2 size-4 animate-spin' /> Please wait...
         </Button>
       ) : (
         <Button type='submit' size='lg' className='text-base'>
@@ -73,6 +73,24 @@ export const DeleteFromFavoriteButton = () => {
           className='bg-primary-foreground'
         >
           <Heart fill='#e21c49' className='text-primary' />
+        </Button>
+      )}
+    </>
+  )
+}
+
+export const MakeReservationButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled className='w-full text-base'>
+          <Loader2 className='mr-2 size-4 animate-spin' /> Please wait...
+        </Button>
+      ) : (
+        <Button type='submit' className='w-full text-base'>
+          Make a reservation
         </Button>
       )}
     </>

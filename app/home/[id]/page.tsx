@@ -1,9 +1,14 @@
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import CategoryShowcase from '@/components/category-showcase'
 import DateRangeCalendar from '@/components/date-range-calendar'
 import HomeMap from '@/components/home-map'
+import { MakeReservationButton } from '@/components/submit-buttons'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { createReservation } from '@/lib/actions'
 import prisma from '@/lib/db'
 import { useCountries } from '@/lib/get-countries'
 
@@ -32,6 +37,11 @@ const getData = async ({ homeId }: { homeId: string }) => {
           firstName: true,
           lastName: true
         }
+      },
+      Reservation: {
+        where: {
+          homeId
+        }
       }
     }
   })
@@ -43,6 +53,8 @@ export default async function Home({ params }: { params: { id: string } }) {
   const data = await getData({ homeId: params.id })
   const { getCountryByValue } = useCountries()
   const country = getCountryByValue(data?.country as string)
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
 
   return (
     <section className='container mx-auto mb-36 mt-10 w-full'>
@@ -98,7 +110,20 @@ export default async function Home({ params }: { params: { id: string } }) {
           <p className='mt-6'>{data?.description}</p>
         </div>
 
-        <DateRangeCalendar />
+        <form action={createReservation} className='mx-auto w-[332px]'>
+          <input type='hidden' name='userId' value={user?.id} />
+          <input type='hidden' name='homeId' value={params.id} />
+
+          <DateRangeCalendar reservation={data?.Reservation} />
+
+          {user?.id ? (
+            <MakeReservationButton />
+          ) : (
+            <Button asChild className='w-full'>
+              <Link href='/api/auth/login'>Make a reservation</Link>
+            </Button>
+          )}
+        </form>
       </div>
 
       <Separator className='mb-10 mt-6' />
