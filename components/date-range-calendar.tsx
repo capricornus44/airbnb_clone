@@ -24,7 +24,7 @@ const DateRangeCalendar = () => {
       rangeColors={['#ff5a5f']}
       ranges={state}
       onChange={item => setState([item.selection as any])}
-      className='mx-auto w-[320px]'
+      className='mx-auto w-[332px]'
     />
   )
 }
