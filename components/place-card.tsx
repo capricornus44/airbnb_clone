@@ -63,7 +63,7 @@ const PlaceCard = ({
         )}
       </div>
 
-      <Link href=''>
+      <Link href={`/home/${homeId}`}>
         <h2 className='font-semibold'>
           {country?.label}, {country?.region}
         </h2>

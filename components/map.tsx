@@ -1,3 +1,5 @@
+'use client'
+
 import { icon } from 'leaflet'
 import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 

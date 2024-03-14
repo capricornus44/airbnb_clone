@@ -2,6 +2,7 @@
   "extends": ["next", "prettier", "next/core-web-vitals"],
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
+    "react/no-unescaped-entities": "off",
     "no-console": "warn",
     "no-duplicate-imports": "error",
     "prefer-const": "error",
