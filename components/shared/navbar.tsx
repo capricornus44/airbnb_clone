@@ -4,6 +4,7 @@ import Link from 'next/link'
 import desktopLogo from '../../public/airbnb_full.svg'
 import mobileLogo from '../../public/airbnb_logo.svg'
 
+import Searchbar from './searchbar'
 import UserMenu from './user-menu'
 
 const Navbar = () => {
@@ -25,19 +26,7 @@ const Navbar = () => {
           />
         </Link>
 
-        <nav className='rounded-full border px-5 py-2'>
-          <ul className='flex gap-4'>
-            <li>
-              <Link href=''>1</Link>
-            </li>
-            <li>
-              <Link href=''>2</Link>
-            </li>
-            <li>
-              <Link href=''>3</Link>
-            </li>
-          </ul>
-        </nav>
+        <Searchbar />
 
         <UserMenu />
       </div>
