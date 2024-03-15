@@ -6,30 +6,10 @@ import NoResult from '@/components/no-result'
 import PlaceCard from '@/components/place-card'
 import prisma from '@/lib/db'
 
-interface HomeFavorite {
-  id: string
-}
-
-interface Home {
-  photo?: string
-  id?: string
-  price?: string
-  description?: string
-  country?: string
-  Favorite: HomeFavorite[]
-}
-
-interface Reservation {
-  id: string
-  startDate: Date
-  endDate: Date
-  Home?: Home
-}
-
 const getData = async ({ userId }: { userId: string }) => {
   noStore()
 
-  const data: Reservation[] = await prisma.reservation.findMany({
+  const data = await prisma.reservation.findMany({
     where: {
       userId
     },
@@ -76,7 +56,7 @@ export default async function Trips() {
         />
       ) : (
         <ul className='grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          {data.map((reservation: Reservation) => (
+          {data.map(reservation => (
             <PlaceCard
               key={reservation.id}
               location={reservation.Home?.country as string}

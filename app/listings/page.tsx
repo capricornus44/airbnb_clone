@@ -6,19 +6,6 @@ import NoResult from '@/components/no-result'
 import PlaceCard from '@/components/place-card'
 import prisma from '@/lib/db'
 
-interface HomeFavorite {
-  id: string
-}
-
-interface Home {
-  photo?: string
-  id: string
-  price?: string
-  description?: string
-  country?: string
-  Favorite: HomeFavorite[]
-}
-
 const getData = async ({ userId }: { userId: string | undefined }) => {
   noStore()
 
@@ -54,7 +41,7 @@ export default async function Listings() {
 
   if (!user) return redirect('/')
 
-  const wishlist: Home[] = await getData({ userId: user?.id })
+  const wishlist = await getData({ userId: user?.id })
 
   return (
     <section className='container mx-auto mt-10 px-5 lg:px-10'>
@@ -67,7 +54,7 @@ export default async function Listings() {
         />
       ) : (
         <ul className='grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          {wishlist.map((place: Home) => (
+          {wishlist.map(place => (
             <PlaceCard
               key={place.id}
               location={place.country as string}

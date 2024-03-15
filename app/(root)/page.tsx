@@ -8,15 +8,6 @@ import PlaceCard from '@/components/place-card'
 import SkeletonCard from '@/components/skeleton-card'
 import prisma from '@/lib/db'
 
-interface Home {
-  photo?: string
-  id: string
-  price?: string
-  description?: string
-  country?: string
-  Favorite: { id: string }[]
-}
-
 const getData = async ({
   searchParams,
   userId
@@ -95,7 +86,7 @@ const PlacesList = async ({
 }) => {
   const { getUser } = getKindeServerSession()
   const user = await getUser()
-  const places: Home[] = await getData({ searchParams, userId: user?.id })
+  const places = await getData({ searchParams, userId: user?.id })
 
   return (
     <>
@@ -106,7 +97,7 @@ const PlacesList = async ({
         />
       ) : (
         <ul className='grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          {places.map((place: Home) => (
+          {places.map(place => (
             <PlaceCard
               key={place.id}
               location={place.country as string}
