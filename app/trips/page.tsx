@@ -1,4 +1,5 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { unstable_noStore as noStore } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import NoResult from '@/components/no-result'
@@ -26,6 +27,8 @@ interface Reservation {
 }
 
 const getData = async ({ userId }: { userId: string }) => {
+  noStore()
+
   const data: Reservation[] = await prisma.reservation.findMany({
     where: {
       userId

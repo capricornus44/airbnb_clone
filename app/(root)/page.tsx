@@ -1,4 +1,5 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { unstable_noStore as noStore } from 'next/cache'
 import { Suspense } from 'react'
 
 import CategoriesFilter from '@/components/categories-filter'
@@ -29,6 +30,8 @@ const getData = async ({
     bathrooms?: string
   }
 }) => {
+  noStore()
+
   const data = await prisma.home.findMany({
     where: {
       isCategoryAdded: true,

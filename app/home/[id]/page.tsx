@@ -1,4 +1,5 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { unstable_noStore as noStore } from 'next/cache'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,6 +16,8 @@ import { useCountries } from '@/lib/get-countries'
 import defaultUser from '../../../public/default_user.png'
 
 const getData = async ({ homeId }: { homeId: string }) => {
+  noStore()
+
   const data = await prisma.home.findUnique({
     where: {
       id: homeId
