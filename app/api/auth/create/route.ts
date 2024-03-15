@@ -32,7 +32,5 @@ export async function GET() {
     })
   }
 
-  return NextResponse.redirect(
-    'https://airbnb-clone-fyuaditc4-capricornus44.vercel.app'
-  )
+  return NextResponse.redirect('https://airbnb-clone-sage-three.vercel.app')
 }
